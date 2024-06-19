@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh Sách Nhân Viên</title>
+    <th:block th:replace="layout::link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div class="container">
+    <h1 th:text="${title}"></h1>
+    <table class="table">
+        <tr>
+            <th>Mã Nhân Viên</th>
+            <th>Tên Nhân Viên</th>
+            <th>Phái</th>
+            <th>Nơi Sinh</th>
+            <th>Tên Phòng</th>
+            <th>Lương</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="nhanvien : ${nhanvien}">
+            <td th:text="${nhanvien.MaNV}"></td>
+            <td th:text="${nhanvien.TenNV}"></td>
+            <td>
+                <div th:switch="${nhanvien.Phai}">
+                    <img src="data:image/png;base64,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" alt="NAM" th:case="'NAM'" height="100px" width="100px"></img>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuva_TSdbLcT_Dc93zw5TCeSJYr_1FkKCIrw&s" alt="NU" th:case="'NU'" height="100px" width="100px"></img>
+                </div>
+            </td>
+            <td th:text="${nhanvien.NoiSinh}"></td>
+            <td th:text="${nhanvien.phongban.TenPhong}"></td>
+            <td th:text="${nhanvien.Luong}"></td>
+            <td>
+                <a th:href="@{/nhanviens/edit/{id}(id=${nhanvien.id})}">Edit</a> |
+                <a th:href="@{/nhanviens/delete/{id}(id=${nhanvien.id})}"
+                   onclick="return confirm('Are you sure?');">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>
